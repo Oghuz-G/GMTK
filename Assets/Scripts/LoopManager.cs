@@ -122,4 +122,13 @@ public class LoopManager : MonoBehaviour
     {
         return Mathf.Max(0f, loopTimer);
     }
+
+    public void ForceStartNextLoop()
+    {
+        // ✅ Do not reset timer yet, just start new loop like a timer reached zero
+        StartNewLoop();
+
+        // Reset loop timer for the next loop
+        loopTimer = loopDuration;
+    }
 }
