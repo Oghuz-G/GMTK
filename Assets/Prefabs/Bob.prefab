@@ -44,9 +44,11 @@ GameObject:
   - component: {fileID: 1716935662026230417}
   - component: {fileID: 8474396095046079073}
   - component: {fileID: 7694660788533293170}
+  - component: {fileID: 4882055682769426573}
+  - component: {fileID: -3883491107988613641}
   m_Layer: 6
   m_Name: Bob
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,3 +216,30 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 384
+--- !u!114 &4882055682769426573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5092127089619448877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58c42d0575f065248bdc82a9c0a2f589, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathUIPrefab: {fileID: 1606573566643859019, guid: 36c9d84d3c325354298368c362845bdd, type: 3}
+--- !u!114 &-3883491107988613641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5092127089619448877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98289db35d54ce941ad84f9a209a8fac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recordedPositions: []
+  recordedJumps: 

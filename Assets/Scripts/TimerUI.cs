@@ -1,17 +1,46 @@
 using UnityEngine;
-using TMPro;  // Make sure you have TextMeshPro imported
+using TMPro; // For TextMeshPro
 
 public class TimerUI : MonoBehaviour
 {
-    public LoopManager loopManager;    // Reference to LoopManager
-    public TextMeshProUGUI timerText;  // Assign in Inspector
+    public LoopManager loopManager;
+    public TextMeshProUGUI timerText;  // TMP version
+
+    void Start()
+    {
+        if (loopManager != null)
+        {
+            loopManager.OnLoopEnded += HideUI;
+        }
+    }
 
     void Update()
     {
-        if (loopManager != null && timerText != null)
+        if (loopManager != null)
         {
-            float timeLeft = loopManager.GetTimeRemaining();
-            timerText.text = timeLeft.ToString("F1"); // Show 1 decimal place
+            float timeRemaining = loopManager.GetTimeRemaining();
+
+            // Show 1 decimal place, e.g., 3.4
+            timerText.text = timeRemaining.ToString("F1");
+        }
+
+        if (loopManager.currentEchoCount >= loopManager.maxEchoCount)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+    }
+
+    private void HideUI()
+    {
+        gameObject.SetActive(false); // Hide the timer UI
+    }
+
+    private void OnDestroy()
+    {
+        if (loopManager != null)
+        {
+            loopManager.OnLoopEnded -= HideUI;
         }
     }
 }
