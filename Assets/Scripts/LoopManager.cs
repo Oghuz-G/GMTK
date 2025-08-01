@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class LoopManager : MonoBehaviour
@@ -14,6 +15,9 @@ public class LoopManager : MonoBehaviour
 
     [Header("Echo Settings")]
     public Color echoColor = new Color(1f, 1f, 1f, 0.5f);
+
+    [Header("Collision Settings")]
+    public float spawnCollisionIgnoreDuration = 0.5f; // time to ignore collisions at start of loop
 
     private float loopTimer;
     public int currentEchoCount = 0;
@@ -48,6 +52,9 @@ public class LoopManager : MonoBehaviour
     {
         currentPlayer = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
         currentPlayer.name = "Player_Current";
+
+        // Start temporary collision ignore with echoes
+        StartCoroutine(TemporaryIgnoreEchoCollision());
     }
 
     private void StartNewLoop()
@@ -80,7 +87,6 @@ public class LoopManager : MonoBehaviour
         loopTimer = loopDuration;
         SpawnNewPlayer();
     }
-
 
     private void MakeEcho(GameObject obj)
     {
@@ -130,5 +136,22 @@ public class LoopManager : MonoBehaviour
 
         // Reset loop timer for the next loop
         loopTimer = loopDuration;
+    }
+
+    /// <summary>
+    /// Temporarily disables collision between Player and Echo layers after spawning a new player.
+    /// </summary>
+    private IEnumerator TemporaryIgnoreEchoCollision()
+    {
+        int playerLayer = LayerMask.NameToLayer("Player");
+        int echoLayer = LayerMask.NameToLayer("Echo");
+
+        // Disable collision
+        Physics2D.IgnoreLayerCollision(playerLayer, echoLayer, true);
+
+        yield return new WaitForSeconds(spawnCollisionIgnoreDuration);
+
+        // Re-enable collision
+        Physics2D.IgnoreLayerCollision(playerLayer, echoLayer, false);
     }
 }

@@ -1,20 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour
 {
     private bool isDead = false;
-
-    [Header("UI References")]
-    public Canvas deathCanvas; // ✅ Drag the whole Death UI Canvas here
-    private RestartButton restartButtonScript; // Script that actually restarts the game
+    public Canvas deathCanvas; // optional final UI with RestartButton
+    private RestartButton restartButtonScript;
 
     void Start()
     {
         if (deathCanvas != null)
-        {
-            // Find the RestartButton script anywhere in this Canvas hierarchy
             restartButtonScript = deathCanvas.GetComponentInChildren<RestartButton>(true);
-        }
     }
 
     public void Die()
@@ -24,25 +20,23 @@ public class PlayerDeath : MonoBehaviour
 
         LoopManager loopManager = FindObjectOfType<LoopManager>();
 
-        if (loopManager != null)
+        if (loopManager != null && loopManager.currentEchoCount < loopManager.maxEchoCount)
         {
-            if (loopManager.currentEchoCount < loopManager.maxEchoCount)
-            {
-                // ✅ Trigger next loop instead of death
-                loopManager.ForceStartNextLoop();
-            }
-            else
-            {
-                // ✅ Directly call the restart script when loops are over
-                if (restartButtonScript != null)
-                {
-                    restartButtonScript.RestartScene();
-                }
-                else
-                {
-                    Debug.LogWarning("RestartButton script not found in DeathCanvas!");
-                }
-            }
+            // ✅ Normal loop reset
+            loopManager.ForceStartNextLoop();
+            isDead = false; // keep playing
+            return;
+        }
+
+        // ✅ Final death: restart level
+        if (restartButtonScript != null)
+        {
+            restartButtonScript.RestartScene();
+        }
+        else
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }

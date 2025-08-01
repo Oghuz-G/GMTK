@@ -40,7 +40,15 @@ public class PlayerController2D : MonoBehaviour
     void FixedUpdate()
     {
         rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+
+        if (isGrounded && rb.linearVelocity.y < 0f)
+        {
+            // Apply a small upward correction
+            rb.position += Vector2.up * 0.01f;
+        }
     }
+
+
 
     // Draw gizmos to visualize ground check
     void OnDrawGizmosSelected()
