@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c42d0575f065248bdc82a9c0a2f589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathCanvas: {fileID: 216049206943819985, guid: 36c9d84d3c325354298368c362845bdd, type: 3}
+  deathCanvas: {fileID: 2935334624323768426, guid: 09eff35ef1b91084c902f08f31dd1948, type: 3}
 --- !u!114 &-3883491107988613641
 MonoBehaviour:
   m_ObjectHideFlags: 0
