@@ -113,7 +113,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -1442919730, guid: cbf3bb71d6f974f4bb268e01ebf12194, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c42d0575f065248bdc82a9c0a2f589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathCanvas: {fileID: 2935334624323768426, guid: 09eff35ef1b91084c902f08f31dd1948, type: 3}
+  deathCanvasPrefab: {fileID: 4271384044618419023, guid: 09eff35ef1b91084c902f08f31dd1948, type: 3}
 --- !u!114 &-3883491107988613641
 MonoBehaviour:
   m_ObjectHideFlags: 0

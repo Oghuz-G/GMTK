@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerDeath : MonoBehaviour
 {
     private bool isDead = false;
-    public Canvas deathCanvas; // optional final UI with RestartButton
-    private RestartButton restartButtonScript;
+
+    [Header("Death Menu Prefab")]
+    public Canvas deathCanvasPrefab; // Assign the Death Menu prefab here
+
+    private LoopManager loopManager;
+    private Canvas activeDeathCanvas;
 
     void Start()
     {
-        if (deathCanvas != null)
-            restartButtonScript = deathCanvas.GetComponentInChildren<RestartButton>(true);
+        loopManager = FindObjectOfType<LoopManager>();
     }
 
     public void Die()
@@ -18,25 +20,28 @@ public class PlayerDeath : MonoBehaviour
         if (isDead) return;
         isDead = true;
 
-        LoopManager loopManager = FindObjectOfType<LoopManager>();
+        Debug.Log("Player died!");
 
+        // ✅ Loop reset if loops remain
         if (loopManager != null && loopManager.currentEchoCount < loopManager.maxEchoCount)
         {
-            // ✅ Normal loop reset
+            Debug.Log("Loop reset triggered instead of death menu.");
             loopManager.ForceStartNextLoop();
-            isDead = false; // keep playing
+            isDead = false;
             return;
         }
 
-        // ✅ Final death: restart level
-        if (restartButtonScript != null)
+        // ✅ Final death → spawn death menu
+        Time.timeScale = 0f;
+
+        if (deathCanvasPrefab != null)
         {
-            restartButtonScript.RestartScene();
+            Debug.Log("Spawning Death Menu Prefab...");
+            activeDeathCanvas = Instantiate(deathCanvasPrefab);
         }
         else
         {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Debug.LogWarning("DeathCanvasPrefab is not assigned!");
         }
     }
 }

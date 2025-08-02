@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Button : MonoBehaviour
+public class DoorButton : MonoBehaviour
 {
     public Door linkedDoor;
     private int objectsOnButton = 0;
