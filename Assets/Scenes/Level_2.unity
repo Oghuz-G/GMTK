@@ -3978,12 +3978,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 295144991}
     - target: {fileID: 1528783288203011431, guid: 0b5a1f55a6113f24f8f4ac53ab3f0fd2, type: 3}
+      propertyPath: loopDuration
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1528783288203011431, guid: 0b5a1f55a6113f24f8f4ac53ab3f0fd2, type: 3}
       propertyPath: maxEchoCount
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1528783288203011431, guid: 0b5a1f55a6113f24f8f4ac53ab3f0fd2, type: 3}
       propertyPath: echoRepeatsMovement
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1528783288203011431, guid: 0b5a1f55a6113f24f8f4ac53ab3f0fd2, type: 3}
       propertyPath: spawnCollisionIgnoreDuration
@@ -4233,12 +4237,16 @@ PrefabInstance:
       value: 3.38
       objectReference: {fileID: 0}
     - target: {fileID: 2100588956335349903, guid: 25dfc6c5063f0274c84e32229739dcd2, type: 3}
+      propertyPath: doorCheckOffset
+      value: 1.62
+      objectReference: {fileID: 0}
+    - target: {fileID: 2100588956335349903, guid: 25dfc6c5063f0274c84e32229739dcd2, type: 3}
       propertyPath: doorCheckRadius
       value: 0.48
       objectReference: {fileID: 0}
     - target: {fileID: 2100588956335349903, guid: 25dfc6c5063f0274c84e32229739dcd2, type: 3}
       propertyPath: doorCheckSize.x
-      value: 0.95
+      value: 0.88
       objectReference: {fileID: 0}
     - target: {fileID: 2100588956335349903, guid: 25dfc6c5063f0274c84e32229739dcd2, type: 3}
       propertyPath: doorCheckOffsetY

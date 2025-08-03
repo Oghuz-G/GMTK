@@ -1,41 +1,41 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LevelSelection : MonoBehaviour
 {
-    [Header("References")]
-    public GameObject levelInfoPanel;      // Assign Panel_LevelInfo
-    public GameObject mainMenuPanel;       // Assign Panel_MainMenu
-    public UnityEngine.UI.Button[] levelButtons; // Explicitly UI button
+    public Button[] levelButtons;
+    public LevelInfoPanel levelInfoPanel;    // Drag LevelInfo panel
+    public GameObject levelSelectionPanel;   // Drag LevelSelection panel
+    public GameObject mainMenuPanel;   // Drag LevelSelection panel
 
     void Start()
     {
-        if (levelInfoPanel != null)
-            levelInfoPanel.SetActive(false);
-
-        int unlockedLevels = PlayerPrefs.GetInt("UnlockedLevels", 1);
         for (int i = 0; i < levelButtons.Length; i++)
         {
-            levelButtons[i].interactable = (i < unlockedLevels);
+            int index = i; // Local copy for lambda
+
+            levelButtons[i].interactable = true;
+
+            // ✅ Clicking a level shows LevelInfo panel
+            levelButtons[i].onClick.AddListener(() =>
+            {
+                if (levelInfoPanel != null)
+                {
+                    if (levelSelectionPanel != null)
+                        levelSelectionPanel.SetActive(false);
+
+                    levelInfoPanel.gameObject.SetActive(true);
+                    levelInfoPanel.ShowLevel(index);
+                }
+            });
         }
     }
 
-    public void OnLevelButtonClicked(int levelIndex)
+    // ✅ Back button to return to Main Menu
+    public void BackToMainMenu()
     {
-        if (levelInfoPanel == null) return;
-
-        gameObject.SetActive(false);
-        levelInfoPanel.SetActive(true);
-
-        LevelInfoPanel infoPanel = levelInfoPanel.GetComponent<LevelInfoPanel>();
-        if (infoPanel != null)
-            infoPanel.ShowLevel(levelIndex);
-    }
-
-    public void OnBackButton()
-    {
-        gameObject.SetActive(false);
-        if (mainMenuPanel != null)
-            mainMenuPanel.SetActive(true);
+        levelSelectionPanel.SetActive(false);
+        mainMenuPanel.SetActive(true);
     }
 }
